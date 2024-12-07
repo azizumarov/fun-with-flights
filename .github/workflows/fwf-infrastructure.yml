@@ -42,7 +42,7 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           region: centralus # Set this to your target region
           template: "repo/FWF/deployment/Azure Templates/fwf-resource-group.json" 
-          parameters: "repo/FWF/deployment/Azure Templates/fwf-resource-group.parameters.json" rgName=${{env.AZURE_RESOURCEGROUP_NAME}} 
+          parameters: "repo/FWF/deployment/Azure Templates/fwf-resource-group.parameters.json rgName=${{env.AZURE_RESOURCEGROUP_NAME}}"
 
 
       # Deployment of template    
