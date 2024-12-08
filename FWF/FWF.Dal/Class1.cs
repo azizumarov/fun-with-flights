@@ -1,4 +1,4 @@
-﻿namespace FWF.Core
+﻿namespace FWF.Dal
 {
     public class Class1
     {

@@ -1,3 +1,4 @@
+/****** Object:  Table [dbo].[flight_staging]    Script Date: 12/8/2024 5:23:44 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,9 +13,14 @@ CREATE TABLE [dbo].[flight_staging](
 	[codeShare] [nvarchar](50) NULL,
 	[stops] [int] NULL,
 	[equipment] [nvarchar](50) NULL,
- CONSTRAINT [PK_flight] PRIMARY KEY CLUSTERED 
+	[pipelineRunId] [uniqueidentifier] NULL,
+	[provider] [nvarchar](50) NULL,
+	[createdAt] [datetime] NULL,
+ CONSTRAINT [PK_flight_staging] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+
