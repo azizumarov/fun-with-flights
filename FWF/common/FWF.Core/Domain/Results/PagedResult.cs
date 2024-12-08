@@ -9,17 +9,17 @@ namespace FWF.Core.Domain.Results
     public class PagedResult<TValue>
     {
         public List<TValue> Result { get; set; }
+
+        public int Skip { get; set; }
+        public int Take { get; set; }
         public long TotalCount { get; set; }
 
-        public PagedResult(List<TValue> result, long totalCount)
+        public PagedResult(List<TValue> result, int skip, int take,  long totalCount)
         {
             Result = result;
+            Skip = skip;
+            Take = take;
             TotalCount = totalCount;
-        }
-
-        public static PagedResult<TValue> Create(List<TValue> result, long totalCount)
-        {
-            return new PagedResult<TValue>(result, totalCount);
         }
     }
 }

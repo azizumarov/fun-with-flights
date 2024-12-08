@@ -34,7 +34,7 @@ namespace FWF.FlightSearchService.App.Controllers
             var routes = await routeRepository.GetItemsAsync(pagingParameters, sortInfo);
             var result = routes.Select(route => mapper.Map<RouteViewModel>(route)).ToList();
 
-            return Ok(new PagedResult<RouteViewModel>(result, totalCount));
+            return Ok(new PagedResult<RouteViewModel>(result, pagingParameters.Skip, pagingParameters.Take, totalCount));
         }
     }
 }
