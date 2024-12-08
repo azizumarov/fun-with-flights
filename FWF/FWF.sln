@@ -27,14 +27,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		deployment\Templates\ARMTemplateParametersForFactory.json = deployment\Templates\ARMTemplateParametersForFactory.json
 		deployment\Templates\fwf-database.json = deployment\Templates\fwf-database.json
 		deployment\Templates\fwf-database.parameters.json = deployment\Templates\fwf-database.parameters.json
+		deployment\Templates\fwf-key-vault.json = deployment\Templates\fwf-key-vault.json
+		deployment\Templates\fwf-key-vault.parameters.json = deployment\Templates\fwf-key-vault.parameters.json
 		deployment\Templates\fwf-resource-group.json = deployment\Templates\fwf-resource-group.json
 		deployment\Templates\fwf-resource-group.parameters.json = deployment\Templates\fwf-resource-group.parameters.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{17EA1DB9-0064-4285-A925-37B784A0F8E1}"
 	ProjectSection(SolutionItems) = preProject
-		deployment\DBScripts\dbo.route_data_success_sp.sql = deployment\DBScripts\dbo.route_data_success_sp.sql
 		deployment\DBScripts\dbo.route.sql = deployment\DBScripts\dbo.route.sql
+		deployment\DBScripts\dbo.route_data_success_sp.sql = deployment\DBScripts\dbo.route_data_success_sp.sql
 		deployment\DBScripts\dbo.route_staging.sql = deployment\DBScripts\dbo.route_staging.sql
 	EndProjectSection
 EndProject

@@ -6,7 +6,7 @@ namespace FWF.Dal.SqlContext
     {
         public FwfDbContext CreateContext()
         {
-            var opt = new DbContextOptionsBuilder<FwfDbContext>().UseSqlServer(connectionString).Options;
+            var opt = new DbContextOptionsBuilder<FwfDbContext>().UseSqlServer(connectionString, x=> x.MigrationsAssembly("FWF.Dal")).Options;
             return new FwfDbContext(opt);
         }
     }

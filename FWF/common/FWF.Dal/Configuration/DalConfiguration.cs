@@ -29,7 +29,7 @@ namespace FWF.Dal.Configuration
 
             services.AddDbContext<FwfDbContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(connectionString, x => x.MigrationsAssembly("FWF.Dal"));
             });
 
             var dbFactory = new FwfContextFactory(connectionString);
