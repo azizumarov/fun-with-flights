@@ -83,12 +83,14 @@ jobs:
           CONN_STR=$(echo $CONN_STR | sed "s/<password>/${{ env.SQLADMIN_PASS }}/g")
           echo "SQL_DB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
 
-      - name: Install dotnet-ef & Update Database
+      
+      - name: Execute SQL scripts
         run: |
-          dotnet tool install --global dotnet-ef
-          dotnet ef database update --project ${{env.FWF_SOLUTION_PATH}}/common/FWF.Dal/FWF.Dal.csproj --startup-project ${{env.FWF_FLIGHT_SERVICE_PATH}}/${{env.FWF_FLIGHT_SERVICE_PROJECT}}
-        env:
-          ConnectionStrings__FWFDatabase: ${{ env.SQL_DB_CONN_STR }}
+          for script in $(ls repo/FWF/deployment/DBScripts/*.sql | sort); do
+            echo "Executing $script"
+            sqlcmd -S ${{ env.SQLSERVER_NAME }}.database.windows.net -U ${{ secrets.SQLADMIN_LOGIN }} -P ${{ secrets.SQLADMIN_PASS }} -d ${{ env.DATABASE_NAME }} -i $script
+          done
+
       # Deployment of template    
       - name: Deploy ARM Template key vault 
         uses: azure/arm-deploy@v1
