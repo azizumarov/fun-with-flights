@@ -15,11 +15,11 @@
    "T4TemplatePath": null,
    "Tables": [
       {
-         "Name": "[dbo].[flight]",
+         "Name": "[dbo].[route]",
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[flight_staging]",
+         "Name": "[dbo].[route_staging]",
          "ObjectType": 0
       }
    ],

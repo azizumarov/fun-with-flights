@@ -6,8 +6,8 @@ namespace FWF.Core.Helpers.QueryHelpers
     {
         public static PagingParameters Empty => new PagingParameters(0, 0);
 
-        public int Skip { get; }
-        public int Take { get; }
+        public int Skip { get; } = 0;
+        public int Take { get; } = 100;
 
         public PagingParameters(int skip, int take)
         {

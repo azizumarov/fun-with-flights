@@ -10,7 +10,7 @@ GO
 -- Create Date: 12/08-2024
 -- Description: Merge Data after loading
 -- =============================================
-CREATE PROCEDURE flight_data_success_sp
+CREATE PROCEDURE route_data_success_sp
 (
     @runId uniqueidentifier
 )
@@ -22,7 +22,7 @@ BEGIN
 
     -- Insert statements for procedure here
 	-- proceed here any logic for processing data
-    insert into [dbo].[flight]
+    insert into [dbo].[route]
 	(
 		[airline],
 		[sourceAirport],
@@ -42,8 +42,8 @@ BEGIN
 		[fs].[equipment],	
 		[fs].[provider],
 		[fs].[createdAt]
-	FROM [dbo].[flight_staging] [fs] (nolock)
-	LEFT JOIN [dbo].[flight] [f] (nolock) ON
+	FROM [dbo].[route_staging] [fs] (nolock)
+	LEFT JOIN [dbo].[route] [f] (nolock) ON
 		[fs].[airline] = [f].[airline]
 		AND [fs].[sourceAirport] = [f].[sourceAirport]
 		AND [fs].[destinationAirport] = [f].[destinationAirport]
@@ -54,8 +54,8 @@ BEGIN
 		AND [f].[airline] IS NULL
 
 	DELETE [f]
-	FROM [dbo].[flight_staging] [fs] (nolock)
-	RIGHT JOIN [dbo].[flight] [f] (nolock) ON
+	FROM [dbo].[route_staging] [fs] (nolock)
+	RIGHT JOIN [dbo].[route] [f] (nolock) ON
 		[fs].[airline] = [f].[airline]
 		AND [fs].[sourceAirport] = [f].[sourceAirport]
 		AND [fs].[destinationAirport] = [f].[destinationAirport]

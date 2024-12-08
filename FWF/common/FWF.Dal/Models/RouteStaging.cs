@@ -8,42 +8,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FWF.Dal.Models;
 
-[PrimaryKey("Airline", "SourceAirport", "DestinationAirport", "CodeShare", "Stops")]
-[Table("flight")]
-public partial class Flight
+[Table("route_staging")]
+public partial class RouteStaging
 {
     [Key]
+    [Column("id")]
+    public long Id { get; set; }
+
     [Column("airline")]
     [StringLength(50)]
     public string Airline { get; set; }
 
-    [Key]
     [Column("sourceAirport")]
     [StringLength(50)]
     public string SourceAirport { get; set; }
 
-    [Key]
     [Column("destinationAirport")]
     [StringLength(50)]
     public string DestinationAirport { get; set; }
 
-    [Key]
     [Column("codeShare")]
     [StringLength(50)]
     public string CodeShare { get; set; }
 
-    [Key]
     [Column("stops")]
-    public int Stops { get; set; }
+    public int? Stops { get; set; }
 
     [Column("equipment")]
     [StringLength(50)]
     public string Equipment { get; set; }
 
-    [Column("sourceName")]
+    [Column("pipelineRunId")]
+    public Guid? PipelineRunId { get; set; }
+
+    [Column("provider")]
     [StringLength(50)]
-    public string SourceName { get; set; }
+    public string Provider { get; set; }
 
     [Column("createdAt", TypeName = "datetime")]
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 }

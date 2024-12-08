@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[flight](
+CREATE TABLE [dbo].[route](
 	[airline] [nvarchar](50) NOT NULL,
 	[sourceAirport] [nvarchar](50) NOT NULL,
 	[destinationAirport] [nvarchar](50) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[flight](
 	[equipment] [nvarchar](50) NULL,
 	[sourceName] [nvarchar](50) null,
 	[createdAt] [datetime] not null,
-CONSTRAINT [PK_flight] PRIMARY KEY CLUSTERED 
+CONSTRAINT [PK_route] PRIMARY KEY CLUSTERED 
 (
 	[airline] 
 	,[sourceAirport]

@@ -1,10 +1,6 @@
-﻿using FWF.Core.Domain.Interfaces;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace FWF.Core.Domain.Models
+﻿namespace FWF.FlightSearchService.App.Models
 {
-    public class Flight:IDomainClass
+    public class RouteViewModel
     {
         public string Airline { get; set; }
 
@@ -21,6 +17,5 @@ namespace FWF.Core.Domain.Models
         public string SourceName { get; set; }
 
         public DateTime CreatedAt { get; set; }
-
     }
 }

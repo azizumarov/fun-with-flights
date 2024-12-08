@@ -1,6 +1,6 @@
 @FWF.FlightSearchService.App_HostAddress = http://localhost:5167
 
-GET {{FWF.FlightSearchService.App_HostAddress}}/weatherforecast/
+GET {{FWF.FlightSearchService.App_HostAddress}}/routes
 Accept: application/json
 
 ###

@@ -33,12 +33,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{17EA1DB9-0064-4285-A925-37B784A0F8E1}"
 	ProjectSection(SolutionItems) = preProject
-		deployment\DBScripts\dbo.flight.sql = deployment\DBScripts\dbo.flight.sql
-		deployment\DBScripts\dbo.flight_data_success_sp.sql = deployment\DBScripts\dbo.flight_data_success_sp.sql
-		deployment\DBScripts\dbo.flight_staging.sql = deployment\DBScripts\dbo.flight_staging.sql
+		deployment\DBScripts\dbo.route_data_success_sp.sql = deployment\DBScripts\dbo.route_data_success_sp.sql
+		deployment\DBScripts\dbo.route.sql = deployment\DBScripts\dbo.route.sql
+		deployment\DBScripts\dbo.route_staging.sql = deployment\DBScripts\dbo.route_staging.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FWF.Dal", "FWF.Dal\FWF.Dal.csproj", "{EB229546-9759-4651-AEBF-027801ACEB38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.Dal.Tests", "test\FWF.Dal.Tests\FWF.Dal.Tests.csproj", "{91A89693-F1A4-4B38-9FB8-E495AD883467}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.Dal", "common\FWF.Dal\FWF.Dal.csproj", "{454BEE39-F682-4E0F-900F-7484D12CF7CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +64,14 @@ Global
 		{76658033-B62C-45F4-A248-47841A3DF07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76658033-B62C-45F4-A248-47841A3DF07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76658033-B62C-45F4-A248-47841A3DF07F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB229546-9759-4651-AEBF-027801ACEB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB229546-9759-4651-AEBF-027801ACEB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB229546-9759-4651-AEBF-027801ACEB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB229546-9759-4651-AEBF-027801ACEB38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A89693-F1A4-4B38-9FB8-E495AD883467}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A89693-F1A4-4B38-9FB8-E495AD883467}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A89693-F1A4-4B38-9FB8-E495AD883467}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A89693-F1A4-4B38-9FB8-E495AD883467}.Release|Any CPU.Build.0 = Release|Any CPU
+		{454BEE39-F682-4E0F-900F-7484D12CF7CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{454BEE39-F682-4E0F-900F-7484D12CF7CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{454BEE39-F682-4E0F-900F-7484D12CF7CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{454BEE39-F682-4E0F-900F-7484D12CF7CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,7 +83,8 @@ Global
 		{76658033-B62C-45F4-A248-47841A3DF07F} = {66A96CC1-6321-4B04-B902-FA68F784883F}
 		{576C73C4-0398-47A6-9B4A-1EA293149F87} = {221B5006-1AA4-437E-B5CD-5AA50F3CCEC2}
 		{17EA1DB9-0064-4285-A925-37B784A0F8E1} = {221B5006-1AA4-437E-B5CD-5AA50F3CCEC2}
-		{EB229546-9759-4651-AEBF-027801ACEB38} = {723516D8-E30B-45CE-A41C-D84D05C114E0}
+		{91A89693-F1A4-4B38-9FB8-E495AD883467} = {81AF53D0-F755-4435-AFCA-C665E8CE68F9}
+		{454BEE39-F682-4E0F-900F-7484D12CF7CB} = {723516D8-E30B-45CE-A41C-D84D05C114E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3DC8633E-AAC8-4F3B-BD4E-50ECF2BECA0F}
