@@ -1,0 +1,727 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "type": "string",
+            "metadata": "Data Factory name",
+            "defaultValue": "fwf-data-factory"
+        },
+        "AzureSqlDatabase1_password": {
+            "type": "secureString",
+            "metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+        },
+        "fwf_source_link1_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://4r5rvu2fcydfzr5gymlhcsnfem0lyxoe.lambda-url.eu-central-1.on.aws/provider/flights1"
+        },
+        "AzureSqlDatabase1_properties_typeProperties_server": {
+            "type": "string",
+            "defaultValue": "fwf-db-srv.database.windows.net"
+        },
+        "AzureSqlDatabase1_properties_typeProperties_database": {
+            "type": "string",
+            "defaultValue": "fwfdb"
+        },
+        "AzureSqlDatabase1_properties_typeProperties_userName": {
+            "type": "string",
+            "defaultValue": "fwfAdmin"
+        },
+        "fwf_source_link2_properties_typeProperties_url": {
+            "type": "string",
+            "defaultValue": "https://4r5rvu2fcydfzr5gymlhcsnfem0lyxoe.lambda-url.eu-central-1.on.aws/provider/flights2"
+        }
+    },
+    "variables": {
+        "factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('factoryName'), '/fwf_source_link1')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "HttpServer",
+                "typeProperties": {
+                    "url": "[parameters('fwf_source_link1_properties_typeProperties_url')]",
+                    "enableServerCertificateValidation": true,
+                    "authenticationType": "Anonymous"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "AzureSqlDatabase",
+                "typeProperties": {
+                    "server": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]",
+                    "database": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]",
+                    "encrypt": "mandatory",
+                    "trustServerCertificate": true,
+                    "authenticationType": "SQL",
+                    "userName": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]",
+                    "password": {
+                        "type": "SecureString",
+                        "value": "[parameters('AzureSqlDatabase1_password')]"
+                    }
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/fwf_source_link2')]",
+            "type": "Microsoft.DataFactory/factories/linkedServices",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "type": "HttpServer",
+                "typeProperties": {
+                    "url": "[parameters('fwf_source_link2_properties_typeProperties_url')]",
+                    "enableServerCertificateValidation": true,
+                    "authenticationType": "Anonymous"
+                }
+            },
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/DestinationDataset_tuc')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "AzureSqlDatabase1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "AzureSqlTable",
+                "schema": [
+                    {
+                        "name": "id",
+                        "type": "bigint",
+                        "precision": 19
+                    },
+                    {
+                        "name": "airline",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "sourceAirport",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "destinationAirport",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "codeShare",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "stops",
+                        "type": "int",
+                        "precision": 10
+                    },
+                    {
+                        "name": "equipment",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "pipelineRunId",
+                        "type": "uniqueidentifier"
+                    },
+                    {
+                        "name": "provider",
+                        "type": "nvarchar"
+                    },
+                    {
+                        "name": "createdAt",
+                        "type": "datetime",
+                        "precision": 23,
+                        "scale": 3
+                    }
+                ],
+                "typeProperties": {
+                    "schema": "dbo",
+                    "table": "flight_staging"
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/fwf_source_Json')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "fwf_source_link1",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Json",
+                "typeProperties": {
+                    "location": {
+                        "type": "HttpServerLocation"
+                    }
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "codeShare": {
+                            "type": "string"
+                        },
+                        "sourceAirport": {
+                            "type": "string"
+                        },
+                        "equipment": {
+                            "type": "string"
+                        },
+                        "stops": {
+                            "type": "integer"
+                        },
+                        "airline": {
+                            "type": "string"
+                        },
+                        "destinationAirport": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/fwf_source_link1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/fwf_source2_Json')]",
+            "type": "Microsoft.DataFactory/factories/datasets",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "fwf_source_link2",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Json",
+                "typeProperties": {
+                    "location": {
+                        "type": "HttpServerLocation"
+                    }
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "codeShare": {
+                            "type": "string"
+                        },
+                        "sourceAirport": {
+                            "type": "string"
+                        },
+                        "equipment": {
+                            "type": "string"
+                        },
+                        "stops": {
+                            "type": "integer"
+                        },
+                        "airline": {
+                            "type": "string"
+                        },
+                        "destinationAirport": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/linkedServices/fwf_source_link2')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/FlightPipeline1')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "flight_provider1",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [
+                            {
+                                "name": "Destination",
+                                "value": "dbo.flight_staging"
+                            }
+                        ],
+                        "typeProperties": {
+                            "source": {
+                                "type": "JsonSource",
+                                "additionalColumns": [
+                                    {
+                                        "name": "runId",
+                                        "value": {
+                                            "value": "@pipeline().RunId",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    {
+                                        "name": "provider",
+                                        "value": {
+                                            "value": "@pipeline().Pipeline",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    {
+                                        "name": "createAt",
+                                        "value": {
+                                            "value": "@pipeline().TriggerTime",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                ],
+                                "storeSettings": {
+                                    "type": "HttpReadSettings",
+                                    "maxConcurrentConnections": 1,
+                                    "requestMethod": "GET",
+                                    "requestTimeout": "00:00:10"
+                                },
+                                "formatSettings": {
+                                    "type": "JsonReadSettings"
+                                }
+                            },
+                            "sink": {
+                                "type": "AzureSqlSink",
+                                "writeBatchSize": 10000,
+                                "maxConcurrentConnections": 2,
+                                "writeBehavior": "insert",
+                                "sqlWriterUseTableLock": true,
+                                "disableMetricsCollection": false
+                            },
+                            "enableStaging": false,
+                            "enableSkipIncompatibleRow": true,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "mappings": [
+                                    {
+                                        "source": {
+                                            "path": "$['codeShare']"
+                                        },
+                                        "sink": {
+                                            "name": "codeShare",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['sourceAirport']"
+                                        },
+                                        "sink": {
+                                            "name": "sourceAirport",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['equipment']"
+                                        },
+                                        "sink": {
+                                            "name": "equipment",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['stops']"
+                                        },
+                                        "sink": {
+                                            "name": "stops",
+                                            "type": "Int32"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['airline']"
+                                        },
+                                        "sink": {
+                                            "name": "airline",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['destinationAirport']"
+                                        },
+                                        "sink": {
+                                            "name": "destinationAirport",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['runId']"
+                                        },
+                                        "sink": {
+                                            "name": "pipelineRunId",
+                                            "type": "Guid"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['provider']"
+                                        },
+                                        "sink": {
+                                            "name": "provider",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['createAt']"
+                                        },
+                                        "sink": {
+                                            "name": "createdAt",
+                                            "type": "DateTime"
+                                        }
+                                    }
+                                ],
+                                "collectionReference": "",
+                                "mapComplexValuesToString": false
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "fwf_source_Json",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "DestinationDataset_tuc",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Stored procedure1",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "flight_provider1",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dbo].[flight_data_success_sp]",
+                            "storedProcedureParameters": {
+                                "runId": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "Guid"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "AzureSqlDatabase1",
+                            "type": "LinkedServiceReference"
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2024-12-07T23:43:37Z"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/fwf_source_Json')]",
+                "[concat(variables('factoryId'), '/datasets/DestinationDataset_tuc')]",
+                "[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/FlightPipeline2')]",
+            "type": "Microsoft.DataFactory/factories/pipelines",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "flight_provider2",
+                        "type": "Copy",
+                        "dependsOn": [],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [
+                            {
+                                "name": "Destination",
+                                "value": "dbo.flight_staging"
+                            }
+                        ],
+                        "typeProperties": {
+                            "source": {
+                                "type": "JsonSource",
+                                "additionalColumns": [
+                                    {
+                                        "name": "runId",
+                                        "value": {
+                                            "value": "@pipeline().RunId",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    {
+                                        "name": "provider",
+                                        "value": {
+                                            "value": "@pipeline().Pipeline",
+                                            "type": "Expression"
+                                        }
+                                    },
+                                    {
+                                        "name": "createdAt",
+                                        "value": {
+                                            "value": "@pipeline().TriggerTime",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                ],
+                                "storeSettings": {
+                                    "type": "HttpReadSettings",
+                                    "maxConcurrentConnections": 2,
+                                    "requestMethod": "GET",
+                                    "requestTimeout": "00:00:10"
+                                },
+                                "formatSettings": {
+                                    "type": "JsonReadSettings"
+                                }
+                            },
+                            "sink": {
+                                "type": "AzureSqlSink",
+                                "writeBatchSize": 10000,
+                                "maxConcurrentConnections": 2,
+                                "writeBehavior": "insert",
+                                "sqlWriterUseTableLock": true,
+                                "disableMetricsCollection": false
+                            },
+                            "enableStaging": false,
+                            "enableSkipIncompatibleRow": true,
+                            "translator": {
+                                "type": "TabularTranslator",
+                                "mappings": [
+                                    {
+                                        "source": {
+                                            "path": "$['codeShare']"
+                                        },
+                                        "sink": {
+                                            "name": "codeShare",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['sourceAirport']"
+                                        },
+                                        "sink": {
+                                            "name": "sourceAirport",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['equipment']"
+                                        },
+                                        "sink": {
+                                            "name": "equipment",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['stops']"
+                                        },
+                                        "sink": {
+                                            "name": "stops",
+                                            "type": "Int32"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['airline']"
+                                        },
+                                        "sink": {
+                                            "name": "airline",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['destinationAirport']"
+                                        },
+                                        "sink": {
+                                            "name": "destinationAirport",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['runId']"
+                                        },
+                                        "sink": {
+                                            "name": "pipelineRunId",
+                                            "type": "Guid"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['provider']"
+                                        },
+                                        "sink": {
+                                            "name": "provider",
+                                            "type": "String"
+                                        }
+                                    },
+                                    {
+                                        "source": {
+                                            "path": "$['createdAt']"
+                                        },
+                                        "sink": {
+                                            "name": "createdAt",
+                                            "type": "DateTime"
+                                        }
+                                    }
+                                ],
+                                "collectionReference": ""
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "referenceName": "fwf_source2_Json",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "referenceName": "DestinationDataset_tuc",
+                                "type": "DatasetReference",
+                                "parameters": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Stored procedure1",
+                        "type": "SqlServerStoredProcedure",
+                        "dependsOn": [
+                            {
+                                "activity": "flight_provider2",
+                                "dependencyConditions": [
+                                    "Succeeded"
+                                ]
+                            }
+                        ],
+                        "policy": {
+                            "timeout": "0.12:00:00",
+                            "retry": 3,
+                            "retryIntervalInSeconds": 30,
+                            "secureOutput": false,
+                            "secureInput": false
+                        },
+                        "userProperties": [],
+                        "typeProperties": {
+                            "storedProcedureName": "[[dbo].[flight_data_success_sp]",
+                            "storedProcedureParameters": {
+                                "runId": {
+                                    "value": {
+                                        "value": "@pipeline().RunId",
+                                        "type": "Expression"
+                                    },
+                                    "type": "Guid"
+                                }
+                            }
+                        },
+                        "linkedServiceName": {
+                            "referenceName": "AzureSqlDatabase1",
+                            "type": "LinkedServiceReference"
+                        }
+                    }
+                ],
+                "policy": {
+                    "elapsedTimeMetric": {}
+                },
+                "annotations": [],
+                "lastPublishTime": "2024-12-07T23:48:25Z"
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/datasets/fwf_source2_Json')]",
+                "[concat(variables('factoryId'), '/datasets/DestinationDataset_tuc')]",
+                "[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('factoryName'), '/Trigger_tuc')]",
+            "type": "Microsoft.DataFactory/factories/triggers",
+            "apiVersion": "2018-06-01",
+            "properties": {
+                "annotations": [],
+                "runtimeState": "Started",
+                "pipelines": [
+                    {
+                        "pipelineReference": {
+                            "referenceName": "FlightPipeline1",
+                            "type": "PipelineReference"
+                        },
+                        "parameters": {}
+                    },
+                    {
+                        "pipelineReference": {
+                            "referenceName": "FlightPipeline2",
+                            "type": "PipelineReference"
+                        },
+                        "parameters": {}
+                    }
+                ],
+                "type": "ScheduleTrigger",
+                "typeProperties": {
+                    "recurrence": {
+                        "frequency": "Hour",
+                        "interval": 1,
+                        "startTime": "2024-12-07T18:41:00Z",
+                        "timeZone": "UTC"
+                    }
+                }
+            },
+            "dependsOn": [
+                "[concat(variables('factoryId'), '/pipelines/FlightPipeline1')]",
+                "[concat(variables('factoryId'), '/pipelines/FlightPipeline2')]"
+            ]
+        }
+    ]
+}

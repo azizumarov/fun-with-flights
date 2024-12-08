@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "factoryName": {
+            "value": "fwf-data-factory"
+        },
+        "AzureSqlDatabase1_password": {
+            "value": ""
+        },
+        "fwf_source_link1_properties_typeProperties_url": {
+            "value": "https://4r5rvu2fcydfzr5gymlhcsnfem0lyxoe.lambda-url.eu-central-1.on.aws/provider/flights1"
+        },
+        "AzureSqlDatabase1_properties_typeProperties_server": {
+            "value": "fwf-db-srv.database.windows.net"
+        },
+        "AzureSqlDatabase1_properties_typeProperties_database": {
+            "value": "fwfdb"
+        },
+        "AzureSqlDatabase1_properties_typeProperties_userName": {
+            "value": "fwfAdmin"
+        },
+        "fwf_source_link2_properties_typeProperties_url": {
+            "value": "https://4r5rvu2fcydfzr5gymlhcsnfem0lyxoe.lambda-url.eu-central-1.on.aws/provider/flights2"
+        },
+        "containerUri": {
+            "value": ""
+        },
+        "containerSasToken": {
+            "value": ""
+        }
+    }
+}

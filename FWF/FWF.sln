@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{700FCDD9-AC1D-4859-A51F-41333D66EF9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.FlightSearchService.App", "backend\FWF.FlightSearchService.App\FWF.FlightSearchService.App.csproj", "{1F21A88B-74D8-44A0-9D4E-BCDCB65D8BDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{66A96CC1-6321-4B04-B902-FA68F784883F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{81AF53D0-F755-4435-AFCA-C665E8CE68F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{723516D8-E30B-45CE-A41C-D84D05C114E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.Core", "common\FWF.Core\FWF.Core.csproj", "{0EC62273-07DF-4D57-BE5A-91BCDD08B977}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.Core.Tests", "test\FWF.Core.Tests\FWF.Core.Tests.csproj", "{D6D2E768-05BA-46DE-BE90-E6B5F585DE74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deployment", "deployment", "{221B5006-1AA4-437E-B5CD-5AA50F3CCEC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.FunWithFlights.Web", "frontend\FWF.FunWithFlights.Web\FWF.FunWithFlights.Web.csproj", "{76658033-B62C-45F4-A248-47841A3DF07F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{576C73C4-0398-47A6-9B4A-1EA293149F87}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\Templates\ARMTemplateForFactory.json = deployment\Templates\ARMTemplateForFactory.json
+		deployment\Templates\ARMTemplateParametersForFactory.json = deployment\Templates\ARMTemplateParametersForFactory.json
+		deployment\Templates\fwf-database.json = deployment\Templates\fwf-database.json
+		deployment\Templates\fwf-database.parameters.json = deployment\Templates\fwf-database.parameters.json
+		deployment\Templates\fwf-resource-group.json = deployment\Templates\fwf-resource-group.json
+		deployment\Templates\fwf-resource-group.parameters.json = deployment\Templates\fwf-resource-group.parameters.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F21A88B-74D8-44A0-9D4E-BCDCB65D8BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F21A88B-74D8-44A0-9D4E-BCDCB65D8BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F21A88B-74D8-44A0-9D4E-BCDCB65D8BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F21A88B-74D8-44A0-9D4E-BCDCB65D8BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC62273-07DF-4D57-BE5A-91BCDD08B977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC62273-07DF-4D57-BE5A-91BCDD08B977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC62273-07DF-4D57-BE5A-91BCDD08B977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC62273-07DF-4D57-BE5A-91BCDD08B977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D2E768-05BA-46DE-BE90-E6B5F585DE74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D2E768-05BA-46DE-BE90-E6B5F585DE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D2E768-05BA-46DE-BE90-E6B5F585DE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D2E768-05BA-46DE-BE90-E6B5F585DE74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76658033-B62C-45F4-A248-47841A3DF07F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76658033-B62C-45F4-A248-47841A3DF07F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76658033-B62C-45F4-A248-47841A3DF07F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76658033-B62C-45F4-A248-47841A3DF07F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F21A88B-74D8-44A0-9D4E-BCDCB65D8BDA} = {700FCDD9-AC1D-4859-A51F-41333D66EF9E}
+		{0EC62273-07DF-4D57-BE5A-91BCDD08B977} = {723516D8-E30B-45CE-A41C-D84D05C114E0}
+		{D6D2E768-05BA-46DE-BE90-E6B5F585DE74} = {81AF53D0-F755-4435-AFCA-C665E8CE68F9}
+		{76658033-B62C-45F4-A248-47841A3DF07F} = {66A96CC1-6321-4B04-B902-FA68F784883F}
+		{576C73C4-0398-47A6-9B4A-1EA293149F87} = {221B5006-1AA4-437E-B5CD-5AA50F3CCEC2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3DC8633E-AAC8-4F3B-BD4E-50ECF2BECA0F}
+	EndGlobalSection
+EndGlobal
