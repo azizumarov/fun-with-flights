@@ -95,7 +95,7 @@
                 ],
                 "typeProperties": {
                     "schema": "dbo",
-                    "table": "flight_staging"
+                    "table": "route_staging"
                 }
             },
             "dependsOn": [
@@ -300,7 +300,7 @@
                         "userProperties": [
                             {
                                 "name": "Destination",
-                                "value": "dbo.flight_staging"
+                                "value": "dbo.route_staging"
                             }
                         ],
                         "typeProperties": {
@@ -473,7 +473,7 @@
                         },
                         "userProperties": [],
                         "typeProperties": {
-                            "storedProcedureName": "[[dbo].[flight_data_success_sp]",
+                            "storedProcedureName": "[[dbo].[route_data_success_sp]",
                             "storedProcedureParameters": {
                                 "runId": {
                                     "value": {
@@ -522,7 +522,7 @@
                         "userProperties": [
                             {
                                 "name": "Destination",
-                                "value": "dbo.flight_staging"
+                                "value": "dbo.route_staging"
                             }
                         ],
                         "typeProperties": {
@@ -694,7 +694,7 @@
                         },
                         "userProperties": [],
                         "typeProperties": {
-                            "storedProcedureName": "[[dbo].[flight_data_success_sp]",
+                            "storedProcedureName": "[[dbo].[route_data_success_sp]",
                             "storedProcedureParameters": {
                                 "runId": {
                                     "value": {

@@ -18,6 +18,9 @@ env:
     SQLADMIN_PASS: ${{ secrets.SQLADMIN_PASS  }}                 # Create a secret in your Github repo for the SQL Admin password you want to use
     FWF_APP_SERVICE_PLAN_NAME: fwf-app-service
     FWF_FLIGHT_SERVICE_NAME: fwf-flight-search-service
+    FWF_SOLUTION_PATH: repo/FWF/
+    FWF_FLIGHT_SERVICE_PATH: repo/FWF/backend/FWF.FlightSearchService.App
+    FWF_FLIGHT_SERVICE_PROJECT: FWF.FlightSearchService.App.csproj
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
     fwf-create-azure-resources:
@@ -29,6 +32,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: repo
+
+      # Setup .NET Core SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }} 
+
+      # Restore dependencies
+      - name: Restore dependencies
+        run: |
+          dotnet restore ${{env.FWF_SOLUTION_PATH}}/FWF.sln
       
       - name: Azure Login
         uses: azure/login@v1
@@ -69,6 +83,12 @@ jobs:
           CONN_STR=$(echo $CONN_STR | sed "s/<password>/${{ env.SQLADMIN_PASS }}/g")
           echo "SQL_DB_CONN_STR=$CONN_STR" >> $GITHUB_ENV
 
+      - name: Install dotnet-ef & Update Database
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet ef database update --project ${{env.FWF_SOLUTION_PATH}}/common/FWF.Dal/FWF.Dal.csproj --startup-project ${{env.FWF_FLIGHT_SERVICE_PATH}}/${{env.FWF_FLIGHT_SERVICE_PROJECT}}
+        env:
+          ConnectionStrings__FWFDatabase: ${{ env.SQL_DB_CONN_STR }}
       # Deployment of template    
       - name: Deploy ARM Template key vault 
         uses: azure/arm-deploy@v1
@@ -93,5 +113,16 @@ jobs:
           template: repo/FWF/deployment/Templates/fwf-service-resources.json  # Set this to the location of your template file
           parameters: repo/FWF/deployment/Templates/fwf-service-resources.parameters.json seriviceName=${{env.FWF_FLIGHT_SERVICE_NAME}} aspName=${{env.FWF_APP_SERVICE_PLAN_NAME}} # Set this to the location of your parameters file
 
+    # Deployment of template    
+      - name: Deploy ARM Template Azure Data Factory
+        uses: azure/arm-deploy@v1
+        with:
+          # You can change these environment variables for your configuration:   AZURE_SUBSCRIPTION_ID
+          scope: resourcegroup
+          subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: ${{env.AZURE_RESOURCEGROUP_NAME}}
+          region: centralus # Set this to your target region
+          template: repo/FWF/deployment/Templates/fwf-data-factory.json  # Set this to the location of your template file
+          parameters: repo/FWF/deployment/Templates/fwf-data-factory.parameters.json AzureSqlDatabase1_password=${{env.SQLADMIN_PASS}}
 
 

@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.FunWithFlights.Web", "f
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{576C73C4-0398-47A6-9B4A-1EA293149F87}"
 	ProjectSection(SolutionItems) = preProject
-		deployment\Templates\ARMTemplateForFactory.json = deployment\Templates\ARMTemplateForFactory.json
-		deployment\Templates\ARMTemplateParametersForFactory.json = deployment\Templates\ARMTemplateParametersForFactory.json
 		deployment\Templates\fwf-database.json = deployment\Templates\fwf-database.json
+		deployment\Templates\fwf-data-factory.parameters.json = deployment\Templates\fwf-data-factory.parameters.json
+		deployment\Templates\fwf-data-factory.json = deployment\Templates\fwf-data-factory.json
 		deployment\Templates\fwf-database.parameters.json = deployment\Templates\fwf-database.parameters.json
 		deployment\Templates\fwf-key-vault.json = deployment\Templates\fwf-key-vault.json
 		deployment\Templates\fwf-key-vault.parameters.json = deployment\Templates\fwf-key-vault.parameters.json
