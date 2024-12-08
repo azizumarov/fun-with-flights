@@ -90,8 +90,8 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{env.AZURE_RESOURCEGROUP_NAME}}
           region: centralus # Set this to your target region
-          template: repo/FWF/deployment/Templates/fwf-auth-service-resources.json  # Set this to the location of your template file
-          parameters: repo/FWF/deployment/Templates/fwf-auth-service-resources.parameters.json seriviceName=${{env.FWF_FLIGHT_SERVICE_NAME}} aspName=${{env.FWF_APP_SERVICE_PLAN_NAME}} # Set this to the location of your parameters file
+          template: repo/FWF/deployment/Templates/fwf-service-resources.json  # Set this to the location of your template file
+          parameters: repo/FWF/deployment/Templates/fwf-service-resources.parameters.json seriviceName=${{env.FWF_FLIGHT_SERVICE_NAME}} aspName=${{env.FWF_APP_SERVICE_PLAN_NAME}} # Set this to the location of your parameters file
 
 
 

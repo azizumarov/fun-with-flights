@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		deployment\Templates\fwf-key-vault.parameters.json = deployment\Templates\fwf-key-vault.parameters.json
 		deployment\Templates\fwf-resource-group.json = deployment\Templates\fwf-resource-group.json
 		deployment\Templates\fwf-resource-group.parameters.json = deployment\Templates\fwf-resource-group.parameters.json
+		deployment\Templates\fwf-service-resources.json = deployment\Templates\fwf-service-resources.json
+		deployment\Templates\fwf-service-resources.parameters.json = deployment\Templates\fwf-service-resources.parameters.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{17EA1DB9-0064-4285-A925-37B784A0F8E1}"
