@@ -31,6 +31,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 		deployment\Templates\fwf-resource-group.parameters.json = deployment\Templates\fwf-resource-group.parameters.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBScripts", "DBScripts", "{17EA1DB9-0064-4285-A925-37B784A0F8E1}"
+	ProjectSection(SolutionItems) = preProject
+		deployment\DBScripts\dbo.flight.sql = deployment\DBScripts\dbo.flight.sql
+		deployment\DBScripts\dbo.flight_data_success_sp.sql = deployment\DBScripts\dbo.flight_data_success_sp.sql
+		deployment\DBScripts\dbo.flight_staging.sql = deployment\DBScripts\dbo.flight_staging.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +70,7 @@ Global
 		{D6D2E768-05BA-46DE-BE90-E6B5F585DE74} = {81AF53D0-F755-4435-AFCA-C665E8CE68F9}
 		{76658033-B62C-45F4-A248-47841A3DF07F} = {66A96CC1-6321-4B04-B902-FA68F784883F}
 		{576C73C4-0398-47A6-9B4A-1EA293149F87} = {221B5006-1AA4-437E-B5CD-5AA50F3CCEC2}
+		{17EA1DB9-0064-4285-A925-37B784A0F8E1} = {221B5006-1AA4-437E-B5CD-5AA50F3CCEC2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3DC8633E-AAC8-4F3B-BD4E-50ECF2BECA0F}
