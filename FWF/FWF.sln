@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FWF.FunWithFlights.Web", "f
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{576C73C4-0398-47A6-9B4A-1EA293149F87}"
 	ProjectSection(SolutionItems) = preProject
-		deployment\Templates\fwf-database.json = deployment\Templates\fwf-database.json
 		deployment\Templates\fwf-data-factory-resources.json = deployment\Templates\fwf-data-factory-resources.json
 		deployment\Templates\fwf-data-factory-resources.parameters.json = deployment\Templates\fwf-data-factory-resources.parameters.json
+		deployment\Templates\fwf-database.json = deployment\Templates\fwf-database.json
 		deployment\Templates\fwf-database.parameters.json = deployment\Templates\fwf-database.parameters.json
 		deployment\Templates\fwf-key-vault.json = deployment\Templates\fwf-key-vault.json
 		deployment\Templates\fwf-key-vault.parameters.json = deployment\Templates\fwf-key-vault.parameters.json
@@ -50,6 +50,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "factory", "factory", "{A059
 	ProjectSection(SolutionItems) = preProject
 		deployment\Templates\factory\fwf-data-factory.json = deployment\Templates\factory\fwf-data-factory.json
 		deployment\Templates\factory\fwf-data-factory.parameters.json = deployment\Templates\factory\fwf-data-factory.parameters.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{7DF7490B-8312-496E-AE23-AB7BC9E3545F}"
+	ProjectSection(SolutionItems) = preProject
+		doc\Architecture Overview.docx = doc\Architecture Overview.docx
+		doc\FunWithFlights Architecture diagramm.drawio = doc\FunWithFlights Architecture diagramm.drawio
 	EndProjectSection
 EndProject
 Global
