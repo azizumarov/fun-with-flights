@@ -1,6 +1,7 @@
-@FWF.FlightSearchService.App_HostAddress = http://localhost:5167
+@FWF.FlightSearchService.App_HostAddress = https://localhost:7090
 
-GET {{FWF.FlightSearchService.App_HostAddress}}/routes
+GET {{FWF.FlightSearchService.App_HostAddress}}/routes?Skip=1&Take=100&SortBy=SourceAirport&Direction=0
 Accept: application/json
+
 
 ###
