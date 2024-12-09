@@ -12,8 +12,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace FWF.FlightSearchService.App.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
-    [Authorize]
+    [ApiController]    
     public class RoutesController(IMapper mapper, ILogger<RoutesController> logger, IRouteRepository routeRepository) : ControllerBase
     {
         /// <summary>

@@ -55,7 +55,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{7DF7490B-8312-496E-AE23-AB7BC9E3545F}"
 	ProjectSection(SolutionItems) = preProject
 		doc\Architecture Overview.docx = doc\Architecture Overview.docx
+		doc\CI-CD.docx = doc\CI-CD.docx
 		doc\FunWithFlights Architecture diagramm.drawio = doc\FunWithFlights Architecture diagramm.drawio
+		doc\Infrastructure.docx = doc\Infrastructure.docx
 	EndProjectSection
 EndProject
 Global
