@@ -4,6 +4,7 @@ using FWF.Core.Domain.Results;
 using FWF.Core.Helpers.QueryHelpers;
 using FWF.FlightSearchService.App.Models;
 using FWF.FlightSearchService.App.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -12,6 +13,7 @@ namespace FWF.FlightSearchService.App.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class RoutesController(IMapper mapper, ILogger<RoutesController> logger, IRouteRepository routeRepository) : ControllerBase
     {
         /// <summary>
