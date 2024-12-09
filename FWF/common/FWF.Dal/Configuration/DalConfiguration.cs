@@ -25,7 +25,7 @@ namespace FWF.Dal.Configuration
         public static IServiceCollection ConfigureDal(this IServiceCollection services, IConfiguration configuration)
         {
 
-            var connectionString = configuration.GetConnectionString(Constants.DATABASE_CONNECTION_STRING) ?? throw new Exception("Connection string not provided");
+            var connectionString = configuration[Constants.DATABASE_CONNECTION_STRING] ?? configuration.GetConnectionString(Constants.DATABASE_CONNECTION_STRING) ?? throw new Exception("Connection string not provided");
 
             services.AddDbContext<FwfDbContext>(options =>
             {

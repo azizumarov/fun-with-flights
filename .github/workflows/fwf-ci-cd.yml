@@ -58,7 +58,7 @@ jobs:
       - name: Build and Publish
         run: |
           dotnet build ${{env.FWF_SOLUTION_PATH}}/FWF.sln --configuration Release --no-restore
-          dotnet publish ${{env.FWF_SOLUTION_PATH}}/FWF.sln -c Release -o ${{env.FWF_SOLUTION_PATH}}/publish
+          dotnet publish ${{env.FWF_FLIGHT_SERVICE_PATH}}/${{FWF_FLIGHT_SERVICE_PROJECT}} -c Release -o ${{env.FWF_FLIGHT_SERVICE_PATH}}/${{FWF_FLIGHT_SERVICE_PROJECT}}/publish
       
       #Run Test
       - name: Run Unit Tests
@@ -93,7 +93,7 @@ jobs:
         with: 
           app-name: ${{ env.FWF_FLIGHT_SERVICE_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.FLIGHT_SERVICE_PUBLISH_PROFILE }} # Define secret variable in repository settings as per action documentation
-          package: '${{ env.FWF_FLIGHT_SERVICE_PATH }}/myapp'
+          package: '${{env.FWF_FLIGHT_SERVICE_PATH}}/${{FWF_FLIGHT_SERVICE_PROJECT}}/publish'
           slot-name: staging
 
       - name: Swap to production slot
