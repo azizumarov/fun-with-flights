@@ -3,15 +3,12 @@
     "identityapp1": {
       "connectionInfo": "App registration: fwf-env, Tenant: EPAM (EPAM.onmicrosoft.com - Microsoft Entra ID)",
       "secretStore": "LocalSecretsFile",
-      "resourceId": null,
       "type": "identityapp.secretStore",
       "connectionId": "AzureAD:ClientSecret"
     },
     "secrets1": {
-      "secretStore": null,
-      "resourceId": null,
       "type": "secrets.user",
-      "connectionId": null
+      "dynamicId": null
     }
   }
 }

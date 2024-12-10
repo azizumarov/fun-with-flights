@@ -1,6 +1,4 @@
 ﻿using FWF.Core.Domain.Interfaces;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace FWF.Core.Domain.Models
 {
